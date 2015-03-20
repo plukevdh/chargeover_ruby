@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://imagerelay-staging.chargeover.com/api/v3/customer
+    body:
+      encoding: UTF-8
+      string: ! '{"external_key":"mycustomer_id","company":"Another Customer","superuser_email":"customer@example.com","superuser_first_name":"John","superuser_last_name":"Smith","bill_addr1":"555
+        Main Street","bill_addr2":"Suite 86","bill_state":"Vermont","bill_postcode":"05401","bill_country":"United
+        States","custom_1":"123456"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 13:55:33 GMT
+      Server:
+      - Apache
+      Location:
+      - https://imagerelay-staging.chargeover.com/api/v3/customer/3
+      Content-Length:
+      - '80'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":201,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"id\":3\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 13:55:34 GMT
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/customer/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 13:55:34 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1614'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"superuser_id\":350,\n    \"external_key\":\"mycustomer_id\",\n    \"token\":\"m9o6pevf1z7d\",\n
+        \   \"company\":\"Another Customer\",\n    \"bill_addr1\":\"555 Main Street\",\n
+        \   \"bill_addr2\":\"Suite 86\",\n    \"bill_addr3\":null,\n    \"bill_city\":null,\n
+        \   \"bill_state\":\"Vermont\",\n    \"bill_postcode\":\"05401\",\n    \"bill_country\":\"United
+        States\",\n    \"bill_notes\":null,\n    \"ship_addr1\":null,\n    \"ship_addr2\":null,\n
+        \   \"ship_addr3\":null,\n    \"ship_city\":null,\n    \"ship_state\":null,\n
+        \   \"ship_postcode\":null,\n    \"ship_country\":null,\n    \"ship_notes\":null,\n
+        \   \"terms_id\":2,\n    \"class_id\":null,\n    \"custom_1\":\"123456\",\n
+        \   \"custom_2\":null,\n    \"custom_3\":null,\n    \"admin_id\":null,\n    \"campaign_id\":null,\n
+        \   \"custtype_id\":null,\n    \"currency_id\":1,\n    \"no_taxes\":false,\n
+        \   \"no_dunning\":false,\n    \"write_datetime\":\"2015-03-19 08:55:33\",\n
+        \   \"write_ipaddr\":\"70.88.244.230\",\n    \"mod_datetime\":\"2015-03-19
+        08:55:33\",\n    \"mod_ipaddr\":\"70.88.244.230\",\n    \"terms_name\":\"Net
+        30\",\n    \"terms_days\":30,\n    \"paid\":0,\n    \"total\":0,\n    \"balance\":0,\n
+        \   \"url_paymethodlink\":\"https:\\/\\/imagerelay-staging.chargeover.com\\/r\\/paymethod\\/i\\/m9o6pevf1z7d\",\n
+        \   \"currency_symbol\":\"$\",\n    \"currency_iso4217\":\"USD\",\n    \"display_as\":\"Another
+        Customer\",\n    \"ship_block\":\"\",\n    \"bill_block\":\"555 Main Street\\nSuite
+        86\\nVermont 05401\\nUnited States\",\n    \"superuser_name\":\"John Smith\",\n
+        \   \"superuser_first_name\":\"John\",\n    \"superuser_last_name\":\"Smith\",\n
+        \   \"superuser_phone\":\"\",\n    \"superuser_email\":\"customer@example.com\",\n
+        \   \"customer_id\":3,\n    \"tags\":[\n      \n    ]\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 13:55:34 GMT
+recorded_with: VCR 2.9.3

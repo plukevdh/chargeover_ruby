@@ -1,0 +1,140 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/customer/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 14:08:34 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1613'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"superuser_id\":348,\n    \"external_key\":null,\n    \"token\":\"8c3nxe47hrdt\",\n
+        \   \"company\":\"Updated Company Name\",\n    \"bill_addr1\":\"New Street\",\n
+        \   \"bill_addr2\":\"Suite 42\",\n    \"bill_addr3\":null,\n    \"bill_city\":\"Mashpee\",\n
+        \   \"bill_state\":\"MA\",\n    \"bill_postcode\":\"05401\",\n    \"bill_country\":\"United
+        States\",\n    \"bill_notes\":null,\n    \"ship_addr1\":null,\n    \"ship_addr2\":null,\n
+        \   \"ship_addr3\":null,\n    \"ship_city\":null,\n    \"ship_state\":null,\n
+        \   \"ship_postcode\":null,\n    \"ship_country\":null,\n    \"ship_notes\":null,\n
+        \   \"terms_id\":2,\n    \"class_id\":null,\n    \"custom_1\":null,\n    \"custom_2\":null,\n
+        \   \"custom_3\":null,\n    \"admin_id\":3,\n    \"campaign_id\":null,\n    \"custtype_id\":null,\n
+        \   \"currency_id\":1,\n    \"no_taxes\":false,\n    \"no_dunning\":false,\n
+        \   \"write_datetime\":\"2015-03-18 11:58:28\",\n    \"write_ipaddr\":\"70.88.244.230\",\n
+        \   \"mod_datetime\":\"2015-03-19 09:07:53\",\n    \"mod_ipaddr\":\"70.88.244.230\",\n
+        \   \"terms_name\":\"Net 30\",\n    \"terms_days\":30,\n    \"paid\":0,\n
+        \   \"total\":0,\n    \"balance\":0,\n    \"url_paymethodlink\":\"https:\\/\\/imagerelay-staging.chargeover.com\\/r\\/paymethod\\/i\\/8c3nxe47hrdt\",\n
+        \   \"currency_symbol\":\"$\",\n    \"currency_iso4217\":\"USD\",\n    \"display_as\":\"Updated
+        Company Name\",\n    \"ship_block\":\"\",\n    \"bill_block\":\"New Street\\nSuite
+        42\\nMashpee MA 05401\\nUnited States\",\n    \"superuser_name\":\"Todd Customer\",\n
+        \   \"superuser_first_name\":\"Todd\",\n    \"superuser_last_name\":\"Customer\",\n
+        \   \"superuser_phone\":\"8025551212\",\n    \"superuser_email\":\"newemail@example.com\",\n
+        \   \"customer_id\":1,\n    \"tags\":[\n      \n    ]\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 14:08:34 GMT
+- request:
+    method: put
+    uri: https://imagerelay-staging.chargeover.com/api/v3/customer/1
+    body:
+      encoding: UTF-8
+      string: ! '{"company":"Updated Company Name","superuser_email":"newemail@example.com","superuser_first_name":"Todd","bill_addr1":"New
+        Street","bill_state":"MA","bill_city":"Mashpee"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 14:08:34 GMT
+      Server:
+      - Apache
+      Location:
+      - https://imagerelay-staging.chargeover.com/api/v3/customer/1
+      Content-Length:
+      - '80'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":202,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"id\":1\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 14:08:35 GMT
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/customer/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 14:08:35 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1613'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"superuser_id\":348,\n    \"external_key\":null,\n    \"token\":\"8c3nxe47hrdt\",\n
+        \   \"company\":\"Updated Company Name\",\n    \"bill_addr1\":\"New Street\",\n
+        \   \"bill_addr2\":\"Suite 42\",\n    \"bill_addr3\":null,\n    \"bill_city\":\"Mashpee\",\n
+        \   \"bill_state\":\"MA\",\n    \"bill_postcode\":\"05401\",\n    \"bill_country\":\"United
+        States\",\n    \"bill_notes\":null,\n    \"ship_addr1\":null,\n    \"ship_addr2\":null,\n
+        \   \"ship_addr3\":null,\n    \"ship_city\":null,\n    \"ship_state\":null,\n
+        \   \"ship_postcode\":null,\n    \"ship_country\":null,\n    \"ship_notes\":null,\n
+        \   \"terms_id\":2,\n    \"class_id\":null,\n    \"custom_1\":null,\n    \"custom_2\":null,\n
+        \   \"custom_3\":null,\n    \"admin_id\":3,\n    \"campaign_id\":null,\n    \"custtype_id\":null,\n
+        \   \"currency_id\":1,\n    \"no_taxes\":false,\n    \"no_dunning\":false,\n
+        \   \"write_datetime\":\"2015-03-18 11:58:28\",\n    \"write_ipaddr\":\"70.88.244.230\",\n
+        \   \"mod_datetime\":\"2015-03-19 09:08:34\",\n    \"mod_ipaddr\":\"70.88.244.230\",\n
+        \   \"terms_name\":\"Net 30\",\n    \"terms_days\":30,\n    \"paid\":0,\n
+        \   \"total\":0,\n    \"balance\":0,\n    \"url_paymethodlink\":\"https:\\/\\/imagerelay-staging.chargeover.com\\/r\\/paymethod\\/i\\/8c3nxe47hrdt\",\n
+        \   \"currency_symbol\":\"$\",\n    \"currency_iso4217\":\"USD\",\n    \"display_as\":\"Updated
+        Company Name\",\n    \"ship_block\":\"\",\n    \"bill_block\":\"New Street\\nSuite
+        42\\nMashpee MA 05401\\nUnited States\",\n    \"superuser_name\":\"Todd Customer\",\n
+        \   \"superuser_first_name\":\"Todd\",\n    \"superuser_last_name\":\"Customer\",\n
+        \   \"superuser_phone\":\"8025551212\",\n    \"superuser_email\":\"newemail@example.com\",\n
+        \   \"customer_id\":1,\n    \"tags\":[\n      \n    ]\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 14:08:35 GMT
+recorded_with: VCR 2.9.3

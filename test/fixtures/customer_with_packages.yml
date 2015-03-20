@@ -1,0 +1,198 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/customer/4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 18:06:14 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1609'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"superuser_id\":351,\n    \"external_key\":null,\n    \"token\":\"sc5kwdq0pu89\",\n
+        \   \"company\":\"Test Customer\",\n    \"bill_addr1\":\"123 Main Street\",\n
+        \   \"bill_addr2\":\"Suite 42\",\n    \"bill_addr3\":null,\n    \"bill_city\":\"Burlington\",\n
+        \   \"bill_state\":\"VT\",\n    \"bill_postcode\":\"05401\",\n    \"bill_country\":\"United
+        States\",\n    \"bill_notes\":null,\n    \"ship_addr1\":null,\n    \"ship_addr2\":null,\n
+        \   \"ship_addr3\":null,\n    \"ship_city\":null,\n    \"ship_state\":null,\n
+        \   \"ship_postcode\":null,\n    \"ship_country\":null,\n    \"ship_notes\":null,\n
+        \   \"terms_id\":2,\n    \"class_id\":null,\n    \"custom_1\":null,\n    \"custom_2\":null,\n
+        \   \"custom_3\":null,\n    \"admin_id\":3,\n    \"campaign_id\":null,\n    \"custtype_id\":null,\n
+        \   \"currency_id\":1,\n    \"no_taxes\":false,\n    \"no_dunning\":false,\n
+        \   \"write_datetime\":\"2015-03-19 12:44:21\",\n    \"write_ipaddr\":\"70.88.244.230\",\n
+        \   \"mod_datetime\":\"2015-03-19 12:44:21\",\n    \"mod_ipaddr\":\"70.88.244.230\",\n
+        \   \"terms_name\":\"Net 30\",\n    \"terms_days\":30,\n    \"paid\":0,\n
+        \   \"total\":500,\n    \"balance\":500,\n    \"url_paymethodlink\":\"https:\\/\\/imagerelay-staging.chargeover.com\\/r\\/paymethod\\/i\\/sc5kwdq0pu89\",\n
+        \   \"currency_symbol\":\"$\",\n    \"currency_iso4217\":\"USD\",\n    \"display_as\":\"Test
+        Customer\",\n    \"ship_block\":\"\",\n    \"bill_block\":\"123 Main Street\\nSuite
+        42\\nBurlington VT 05401\\nUnited States\",\n    \"superuser_name\":\"Test
+        Customer\",\n    \"superuser_first_name\":\"Test\",\n    \"superuser_last_name\":\"Customer\",\n
+        \   \"superuser_phone\":\"\",\n    \"superuser_email\":\"buffy@imagerelay.com\",\n
+        \   \"customer_id\":4,\n    \"tags\":[\n      \n    ]\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 18:06:18 GMT
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/package?where=customer_id:EQUALS:4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 18:06:14 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1413'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":[\n
+        \   {\n      \"terms_id\":2,\n      \"currency_id\":1,\n      \"external_key\":null,\n
+        \     \"token\":\"38n5jqdv6ifu\",\n      \"nickname\":\"\",\n      \"paymethod\":\"inv\",\n
+        \     \"paycycle\":\"qtr\",\n      \"bill_addr1\":null,\n      \"bill_addr2\":null,\n
+        \     \"bill_addr3\":null,\n      \"bill_city\":null,\n      \"bill_state\":null,\n
+        \     \"bill_postcode\":null,\n      \"bill_country\":null,\n      \"bill_notes\":null,\n
+        \     \"ship_addr1\":null,\n      \"ship_addr2\":null,\n      \"ship_addr3\":null,\n
+        \     \"ship_city\":null,\n      \"ship_state\":null,\n      \"ship_postcode\":null,\n
+        \     \"ship_country\":null,\n      \"ship_notes\":null,\n      \"creditcard_id\":null,\n
+        \     \"ach_id\":null,\n      \"tokenized_id\":null,\n      \"custom_1\":null,\n
+        \     \"custom_2\":null,\n      \"custom_3\":null,\n      \"write_datetime\":\"2015-03-19
+        12:45:07\",\n      \"mod_datetime\":\"2015-03-19 12:48:07\",\n      \"suspendfrom_datetime\":null,\n
+        \     \"suspendto_datetime\":null,\n      \"cancel_datetime\":null,\n      \"holduntil_datetime\":null,\n
+        \     \"currency_symbol\":\"$\",\n      \"currency_iso4217\":\"USD\",\n      \"amount_collected\":0,\n
+        \     \"amount_invoiced\":500,\n      \"amount_due\":500,\n      \"next_invoice_datetime\":\"2015-06-18
+        07:27:10\",\n      \"package_id\":555,\n      \"customer_id\":4,\n      \"package_status_id\":2,\n
+        \     \"package_status_name\":\"Current\",\n      \"package_status_str\":\"active-current\",\n
+        \     \"package_status_state\":\"a\"\n    }\n  ]\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 18:06:19 GMT
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/package?where=customer_id:EQUALS:4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 18:06:15 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1413'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":[\n
+        \   {\n      \"terms_id\":2,\n      \"currency_id\":1,\n      \"external_key\":null,\n
+        \     \"token\":\"38n5jqdv6ifu\",\n      \"nickname\":\"\",\n      \"paymethod\":\"inv\",\n
+        \     \"paycycle\":\"qtr\",\n      \"bill_addr1\":null,\n      \"bill_addr2\":null,\n
+        \     \"bill_addr3\":null,\n      \"bill_city\":null,\n      \"bill_state\":null,\n
+        \     \"bill_postcode\":null,\n      \"bill_country\":null,\n      \"bill_notes\":null,\n
+        \     \"ship_addr1\":null,\n      \"ship_addr2\":null,\n      \"ship_addr3\":null,\n
+        \     \"ship_city\":null,\n      \"ship_state\":null,\n      \"ship_postcode\":null,\n
+        \     \"ship_country\":null,\n      \"ship_notes\":null,\n      \"creditcard_id\":null,\n
+        \     \"ach_id\":null,\n      \"tokenized_id\":null,\n      \"custom_1\":null,\n
+        \     \"custom_2\":null,\n      \"custom_3\":null,\n      \"write_datetime\":\"2015-03-19
+        12:45:07\",\n      \"mod_datetime\":\"2015-03-19 12:48:07\",\n      \"suspendfrom_datetime\":null,\n
+        \     \"suspendto_datetime\":null,\n      \"cancel_datetime\":null,\n      \"holduntil_datetime\":null,\n
+        \     \"currency_symbol\":\"$\",\n      \"currency_iso4217\":\"USD\",\n      \"amount_collected\":0,\n
+        \     \"amount_invoiced\":500,\n      \"amount_due\":500,\n      \"next_invoice_datetime\":\"2015-06-18
+        07:27:10\",\n      \"package_id\":555,\n      \"customer_id\":4,\n      \"package_status_id\":2,\n
+        \     \"package_status_name\":\"Current\",\n      \"package_status_str\":\"active-current\",\n
+        \     \"package_status_state\":\"a\"\n    }\n  ]\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 18:06:19 GMT
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/package?where=customer_id:EQUALS:4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 18:06:15 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1413'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":[\n
+        \   {\n      \"terms_id\":2,\n      \"currency_id\":1,\n      \"external_key\":null,\n
+        \     \"token\":\"38n5jqdv6ifu\",\n      \"nickname\":\"\",\n      \"paymethod\":\"inv\",\n
+        \     \"paycycle\":\"qtr\",\n      \"bill_addr1\":null,\n      \"bill_addr2\":null,\n
+        \     \"bill_addr3\":null,\n      \"bill_city\":null,\n      \"bill_state\":null,\n
+        \     \"bill_postcode\":null,\n      \"bill_country\":null,\n      \"bill_notes\":null,\n
+        \     \"ship_addr1\":null,\n      \"ship_addr2\":null,\n      \"ship_addr3\":null,\n
+        \     \"ship_city\":null,\n      \"ship_state\":null,\n      \"ship_postcode\":null,\n
+        \     \"ship_country\":null,\n      \"ship_notes\":null,\n      \"creditcard_id\":null,\n
+        \     \"ach_id\":null,\n      \"tokenized_id\":null,\n      \"custom_1\":null,\n
+        \     \"custom_2\":null,\n      \"custom_3\":null,\n      \"write_datetime\":\"2015-03-19
+        12:45:07\",\n      \"mod_datetime\":\"2015-03-19 12:48:07\",\n      \"suspendfrom_datetime\":null,\n
+        \     \"suspendto_datetime\":null,\n      \"cancel_datetime\":null,\n      \"holduntil_datetime\":null,\n
+        \     \"currency_symbol\":\"$\",\n      \"currency_iso4217\":\"USD\",\n      \"amount_collected\":0,\n
+        \     \"amount_invoiced\":500,\n      \"amount_due\":500,\n      \"next_invoice_datetime\":\"2015-06-18
+        07:27:10\",\n      \"package_id\":555,\n      \"customer_id\":4,\n      \"package_status_id\":2,\n
+        \     \"package_status_name\":\"Current\",\n      \"package_status_str\":\"active-current\",\n
+        \     \"package_status_state\":\"a\"\n    }\n  ]\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 18:06:20 GMT
+recorded_with: VCR 2.9.3

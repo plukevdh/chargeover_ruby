@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'chargover_ruby/version'
+require 'chargeover_ruby/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "chargover_ruby"
-  spec.version       = ChargoverRuby::VERSION
+  spec.name          = "chargeover_ruby"
+  spec.version       = ChargeoverRuby::VERSION
   spec.authors       = ["Buffy Miller"]
-  spec.email         = ["buffy@sethmiller.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["buffy@imagerelay.com"]
+  spec.description   = %q{Gem to wrap the chargeover.com API}
+  spec.summary       = %q{Gem to wrap the chargeover.com API}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,11 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest"
+  spec.add_development_dependency "vcr"
+  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "ruby-debug-ide"
+
+  spec.add_dependency "faraday"
+  spec.add_dependency "json"
 end

@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/item/4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 15:22:40 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1088'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":{\n
+        \   \"item_id\":4,\n    \"item_type\":\"service\",\n    \"tierset_id\":4,\n
+        \   \"name\":\"Image Relay Small Plan\",\n    \"description\":null,\n    \"units\":null,\n
+        \   \"accounting_sku\":null,\n    \"external_key\":null,\n    \"token\":\"i4k0u3wpt2zo\",\n
+        \   \"custom_1\":null,\n    \"custom_2\":null,\n    \"custom_3\":null,\n    \"write_datetime\":\"2015-03-17
+        13:37:58\",\n    \"mod_datetime\":\"2015-03-17 13:37:58\",\n    \"units_plural\":\"\",\n
+        \   \"service_data\":{\n      \"trial_days\":0,\n      \"trial_units\":0,\n
+        \     \"is_usage\":false\n    },\n    \"tiersets\":[\n      {\n        \"tierset_id\":4,\n
+        \       \"setup\":0,\n        \"base\":99,\n        \"percent\":\"0.000000\",\n
+        \       \"paycycle\":\"evy\",\n        \"pricemodel\":\"fla\",\n        \"write_datetime\":\"2015-03-17
+        13:37:58\",\n        \"mod_datetime\":\"2015-03-17 13:37:58\",\n        \"setup_formatted\":\"$
+        0.00\",\n        \"base_formatted\":\"$ 99.00\",\n        \"percent_formatted\":\"0
+        %\",\n        \"pricemodel_desc\":\"Flat Pricing (e.g. $X dollars per month)\",\n
+        \       \"tiers\":[\n          \n        ]\n      }\n    ],\n    \"categories\":[\n
+        \     \n    ]\n  }\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 15:22:42 GMT
+recorded_with: VCR 2.9.3

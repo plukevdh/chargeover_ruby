@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://imagerelay-staging.chargeover.com/api/v3/item?where=external_key:EQUALS:my_external_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Mar 2015 16:15:39 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '1044'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"code\":200,\n  \"status\":\"OK\",\n  \"message\":\"\",\n  \"response\":[\n
+        \   {\n      \"item_id\":6,\n      \"item_type\":\"service\",\n      \"tierset_id\":8,\n
+        \     \"name\":\"Test Product\",\n      \"description\":\"\",\n      \"units\":null,\n
+        \     \"accounting_sku\":null,\n      \"external_key\":\"my_external_id\",\n
+        \     \"token\":\"zguij401k256\",\n      \"custom_1\":null,\n      \"custom_2\":null,\n
+        \     \"custom_3\":null,\n      \"write_datetime\":\"2015-03-19 10:29:14\",\n
+        \     \"mod_datetime\":\"2015-03-19 11:10:44\",\n      \"units_plural\":\"\",\n
+        \     \"tiersets\":[\n        {\n          \"tierset_id\":8,\n          \"setup\":0,\n
+        \         \"base\":100.99,\n          \"percent\":\"0.000000\",\n          \"paycycle\":\"mon\",\n
+        \         \"pricemodel\":\"fla\",\n          \"write_datetime\":\"2015-03-19
+        11:10:44\",\n          \"mod_datetime\":\"2015-03-19 11:10:44\",\n          \"setup_formatted\":\"$
+        0.00\",\n          \"base_formatted\":\"$ 100.99\",\n          \"percent_formatted\":\"0
+        %\",\n          \"pricemodel_desc\":\"Flat Pricing (e.g. $X dollars per month)\",\n
+        \         \"tiers\":[\n            \n          ]\n        }\n      ]\n    }\n
+        \ ]\n}"
+    http_version: 
+  recorded_at: Thu, 19 Mar 2015 16:15:42 GMT
+recorded_with: VCR 2.9.3
