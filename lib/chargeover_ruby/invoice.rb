@@ -58,6 +58,27 @@ module Chargeover
         :line_items
 
 
+    def self.find_all_by_customer_id(customer_id, sort = '', options = [])
+      filter = "?where=customer_id:EQUALS:#{customer_id}"
+
+      query = options.map{ |option| "#{option[:field]}:#{option[:operator]}:#{option[:value]}"}.join(',')
+
+      if query &&query.length > 0
+        filter += ',' + query
+      end
+
+      if sort.length > 0
+        filter += '&order=' + sort
+      end
+
+      response = get(base_url + filter)
+      invoices = []
+      response.each do |invoice|
+        invoices << new(invoice)
+      end
+      invoices
+    end
+
 private
 
     attr_writer :write_datetime

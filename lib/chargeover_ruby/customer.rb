@@ -70,6 +70,10 @@ module Chargeover
       RecurringPackage.find_all_by_customer_id(self.customer_id)
     end
 
+    def invoices(sort = '', options = [])
+      Invoice.find_all_by_customer_id(self.customer_id, sort, options)
+    end
+
 private
     attr_writer :customer_id,
                 :write_datetime,

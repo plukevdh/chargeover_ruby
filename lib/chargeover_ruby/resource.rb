@@ -125,7 +125,7 @@ module Chargeover
 
     def initialize(attributes)
       attributes.each_key do |attribute|
-        if attribute.end_with?('datetime')
+        if attribute.end_with?('datetime') || attribute == 'date'
           if attributes[attribute] != nil
             send("#{attribute}=", DateTime.parse(attributes[attribute]))
           end

@@ -9,6 +9,8 @@ require "chargeover_ruby/customer"
 require "chargeover_ruby/item"
 require "chargeover_ruby/recurring_package"
 require "chargeover_ruby/invoice"
+require "chargeover_ruby/line_item"
+require "chargeover_ruby/credit_card"
 
 module ChargeoverRuby
 

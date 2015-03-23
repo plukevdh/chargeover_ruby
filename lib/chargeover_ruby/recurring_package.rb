@@ -49,9 +49,28 @@ module Chargeover
       response = get(base_url + "?where=customer_id:EQUALS:#{customer_id}")
       packages = []
       response.each do |package|
-        packages << new(package)
+        packages << RecurringPackage.find(package['package_id'])
       end
       packages
+    end
+
+    def items
+      unless @items
+        @items = []
+        self.line_items.each do |line_item|
+          @items << Chargeover::LineItem.new(line_item)
+        end
+      end
+      @items
+    end
+
+    def credit_card
+      unless @credit_card
+        if self.creditcard_id
+          @credit_card = Chargeover::CreditCard.find(self.creditcard_id)
+        end
+      end
+      @credit_card
     end
 
 private
