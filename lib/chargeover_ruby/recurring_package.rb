@@ -43,7 +43,8 @@ module Chargeover
                   :package_status_str,
                   :package_status_state,
                   :line_items,
-                  :item_type
+                  :item_type,
+                  :holduntil_datetime
 
     def self.find_all_by_customer_id(customer_id)
       response = get(base_url + "?where=customer_id:EQUALS:#{customer_id}")
@@ -71,6 +72,32 @@ module Chargeover
         end
       end
       @credit_card
+    end
+
+
+    def upgrade(old_line_item_id, new_item_id, prorate = true)
+      data = {
+          line_items: [
+              line_item_id: old_line_item_id,
+              item_id: new_item_id,
+              subscribe_prorate: prorate,
+              cancel_prorate: prorate
+        ]
+      }
+
+      response = post(base_url + "/#{self.package_id}?action=upgrade", data)
+
+      if response
+        Chargeover::RecurringPackage.find(self.package_id)
+      else
+        nil
+      end
+    end
+
+
+    def update_hold_date(hold_date)
+      response = post(base_url + "/#{self.package_id}?action=hold", { holduntil_datetime: hold_date })
+      Chargeover::RecurringPackage.find(self.package_id)
     end
 
 private

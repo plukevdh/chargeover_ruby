@@ -143,6 +143,10 @@ module Chargeover
       Chargeover::Resource.put(url, payload)
     end
 
+    def post(url, payload)
+      Chargeover::Resource.post(url, payload)
+    end
+
   end
 
 end
