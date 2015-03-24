@@ -51,4 +51,22 @@ class RecurringPackageTest < ChargoverRubyTest
     end
   end
 
+  def test_should_update_package_payment_method
+    VCR.use_cassette('update_package_payment_method', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(555)
+      assert_equal 'crd', package.paymethod
+      updated_package = package.update_paymethod('inv')
+      assert_equal 'inv', updated_package.paymethod
+    end
+  end
+
+  def test_should_update_package_paycycle
+    VCR.use_cassette('update_package_payment_cycle', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(555)
+      assert_equal 'qtr', package.paycycle
+      updated_package = package.update_paycycle('mon')
+      assert_equal 'mon', updated_package.paycycle
+    end
+  end
+
 end
