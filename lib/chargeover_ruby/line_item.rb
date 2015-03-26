@@ -19,10 +19,21 @@ module Chargeover
                   :item_accounting_sku,
                   :item_units,
                   :line_item_id,
-                  :tierset
+                  :tierset,
+                  :item_token
 
     def item
       @item ||= Chargeover::Item.find(self.item_id)
+    end
+
+    def tierset
+      if @tierset
+        Chargeover::Tierset.new(@tierset)
+      end
+    end
+
+    def tierset=(tireset)
+      @tierset = tireset
     end
 
   end

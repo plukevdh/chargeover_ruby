@@ -56,14 +56,18 @@ module Chargeover
       packages
     end
 
-    def items
-      unless @items
-        @items = []
-        self.line_items.each do |line_item|
-          @items << Chargeover::LineItem.new(line_item)
+    def line_items=(line_items)
+      @line_items = line_items
+    end
+
+    def line_items
+      items = []
+      if @line_items
+        @line_items.each do |line_item|
+          items << Chargeover::LineItem.new(line_item)
         end
       end
-      @items
+      items
     end
 
     def credit_card
@@ -79,12 +83,72 @@ module Chargeover
     def upgrade(old_line_item_id, new_item_id, prorate = true)
       data = {
           line_items: [
-              line_item_id: old_line_item_id,
-              item_id: new_item_id,
-              subscribe_prorate: prorate,
-              cancel_prorate: prorate
+              {
+                line_item_id: old_line_item_id,
+                item_id: new_item_id,
+                subscribe_prorate: prorate,
+                cancel_prorate: prorate
+              }
         ]
       }
+
+      response = post(base_url + "/#{self.package_id}?action=upgrade", data)
+
+      if response
+        Chargeover::RecurringPackage.find(self.package_id)
+      else
+        nil
+      end
+    end
+
+    # note, this is only for FLAT pricing models
+    def change_line_item_price(line_item, amount, description = nil)
+
+      data = {
+          line_items: [
+              {
+                line_item_id: line_item.line_item_id,
+                item_id: line_item.item_id,
+                tierset: {
+                    base: amount.to_s,
+                    pricemodel: "fla",
+                    paycycle: line_item.tierset.paycycle
+                }
+              }
+          ]
+      }
+
+      if description
+        data[:line_items].first[:descrip] = description
+      end
+
+      response = post(base_url + "/#{self.package_id}?action=upgrade", data)
+
+      if response
+        Chargeover::RecurringPackage.find(self.package_id)
+      else
+        nil
+      end
+    end
+
+    # note this is for FLAT pricing models
+    def add_line_item(item, amount, description = nil, paycycle = 'mon')
+      data = {
+          line_items: [
+              {
+                  item_id: item.item_id,
+                  tierset: {
+                      base: amount.to_s,
+                      pricemodel: "fla",
+                      paycycle: paycycle
+                  }
+              }
+          ]
+      }
+
+      if description
+        data[:line_items].first[:descrip] = description
+      end
 
       response = post(base_url + "/#{self.package_id}?action=upgrade", data)
 
@@ -117,6 +181,16 @@ module Chargeover
     def latest_invoice
       invoices = Invoice.find_all_by_package_id(self.package_id, "invoice_date:DESC", [], 1)
       invoices.first
+    end
+
+    def find_line_item_by_item_external_key(key)
+      item = nil
+      self.line_items.each do |line_item|
+        if line_item.item.external_key == key
+          item = line_item
+        end
+      end
+      item
     end
 
 private

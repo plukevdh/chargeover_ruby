@@ -12,6 +12,7 @@ require "chargeover_ruby/invoice"
 require "chargeover_ruby/line_item"
 require "chargeover_ruby/credit_card"
 require "chargeover_ruby/transaction"
+require "chargeover_ruby/tierset"
 
 module ChargeoverRuby
 

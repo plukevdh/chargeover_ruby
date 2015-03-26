@@ -26,9 +26,9 @@ class RecurringPackageTest < ChargoverRubyTest
     VCR.use_cassette('one_recurring_package_with_items', :match_requests_on => [:anonymized_uri]) do
       package = Chargeover::RecurringPackage.find(555)
 
-      assert_equal 1, package.items.length
-      assert_equal Chargeover::LineItem, package.items.first.class
-      assert_equal Chargeover::Item, package.items.first.item.class
+      assert_equal 1, package.line_items.length
+      assert_equal Chargeover::LineItem, package.line_items.first.class
+      assert_equal Chargeover::Item, package.line_items.first.item.class
     end
   end
 
@@ -42,12 +42,13 @@ class RecurringPackageTest < ChargoverRubyTest
 
   def test_should_upgrade_a_package
     VCR.use_cassette('upgrade_a_package', :match_requests_on => [:anonymized_uri]) do
-      package = Chargeover::RecurringPackage.find(555)
-      line_item = package.items.first
+      package = Chargeover::RecurringPackage.find(592)
+      line_item = package.line_items.first
+      assert_equal 500.00, line_item.tierset.base
       new_item = Chargeover::Item.find_by_external_key('super')
       updated_package = package.upgrade(line_item.line_item_id, new_item.item_id)
       assert_equal Chargeover::RecurringPackage, updated_package.class
-      assert_equal new_item.item_id, updated_package.items.first.item_id
+      assert_equal new_item.item_id, updated_package.line_items.first.item_id
     end
   end
 
@@ -93,6 +94,32 @@ class RecurringPackageTest < ChargoverRubyTest
       invoice = package.latest_invoice
       assert Chargeover::Invoice, invoice.class
       assert 571, invoice.package_id
+    end
+  end
+
+  def test_should_change_the_amount_of_a_line_item
+    VCR.use_cassette('update_package_line_item', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(592)
+      line_item = package.find_line_item_by_item_external_key('additional_bandwidth')
+      assert_equal Chargeover::LineItem, line_item.class
+      assert_equal 50, line_item.tierset.base
+      assert_equal Chargeover::LineItem, line_item.class
+      package.change_line_item_price(line_item, 200)
+      package = Chargeover::RecurringPackage.find(592)
+      line_item = package.find_line_item_by_item_external_key('additional_bandwidth')
+      assert_equal 200, line_item.tierset.base
+    end
+  end
+
+  def test_should_add_line_item_to_package
+    VCR.use_cassette('add_line_item', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(592)
+      assert_equal 2, package.line_items.length
+      new_item = Chargeover::Item.find_by_external_key('additional_storage')
+      package.add_line_item(new_item, 800)
+      package = Chargeover::RecurringPackage.find(592)
+      line_item = package.find_line_item_by_item_external_key('additional_storage')
+      assert_equal 800, line_item.tierset.base
     end
   end
 
