@@ -44,7 +44,8 @@ module Chargeover
                   :package_status_state,
                   :line_items,
                   :item_type,
-                  :holduntil_datetime
+                  :holduntil_datetime,
+                  :cancel_datetime
 
     def self.find_all_by_customer_id(customer_id)
       response = get(base_url + "?where=customer_id:EQUALS:#{customer_id}")
@@ -107,6 +108,15 @@ module Chargeover
     def update_hold_date(hold_date)
       response = post(base_url + "/#{self.package_id}?action=hold", { holduntil_datetime: hold_date })
       Chargeover::RecurringPackage.find(self.package_id)
+    end
+
+    def cancel
+      post(base_url + "/#{self.package_id}?action=cancel")
+    end
+
+    def latest_invoice
+      invoices = Invoice.find_all_by_package_id(self.package_id, "invoice_date:DESC", [], 1)
+      invoices.first
     end
 
 private

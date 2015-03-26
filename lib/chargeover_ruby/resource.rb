@@ -22,11 +22,21 @@ module Chargeover
       end
 
       def all
-        response = get(base_url)
+        limit = 100
+        offset = 0
         objs = []
-        response.each do |obj|
-          objs << new(obj)
+
+        response = get(base_url + "?limit=#{limit}&offset=#{offset}")
+
+        while response.length > 0
+          objs = []
+          response.each do |obj|
+            objs << new(obj)
+          end
+          offset += 100
+          response = get(base_url + "?limit=#{limit}&offset=#{offset}")
         end
+
         objs
       end
 
@@ -52,7 +62,7 @@ module Chargeover
         end
       end
 
-      def post(url, payload)
+      def post(url, payload = {})
         conn = Faraday.new(url)
         conn.basic_auth(Chargeover.public_key, Chargeover.private_key)
         response = conn.post do |req|
@@ -126,7 +136,7 @@ module Chargeover
     def initialize(attributes)
       attributes.each_key do |attribute|
         if attribute.end_with?('datetime') || attribute == 'date'
-          if attributes[attribute] != nil
+          if attributes[attribute] != nil && attributes[attribute].length > 0
             send("#{attribute}=", DateTime.parse(attributes[attribute]))
           end
         else
@@ -143,7 +153,7 @@ module Chargeover
       Chargeover::Resource.put(url, payload)
     end
 
-    def post(url, payload)
+    def post(url, payload = {})
       Chargeover::Resource.post(url, payload)
     end
 

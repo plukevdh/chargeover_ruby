@@ -74,6 +74,11 @@ module Chargeover
       Invoice.find_all_by_customer_id(self.customer_id, sort, options)
     end
 
+    def latest_invoice
+      invoices = Invoice.find_all_by_customer_id(self.customer_id, "invoice_date:DESC")
+      invoices.first
+    end
+
 private
     attr_writer :customer_id,
                 :write_datetime,

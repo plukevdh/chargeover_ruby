@@ -55,7 +55,8 @@ module Chargeover
         :url_pdflink,
         :package_id,
         :customer_id,
-        :line_items
+        :line_items,
+        :void_datetime
 
 
     def self.find_all_by_customer_id(customer_id, sort = '', options = [])
@@ -77,6 +78,37 @@ module Chargeover
         invoices << new(invoice)
       end
       invoices
+    end
+
+    def self.find_all_by_package_id(package_id, sort = '', options = [], limit = 100, offset = 0)
+      filter = "?where=package_id:EQUALS:#{package_id}"
+
+      query = options.map{ |option| "#{option[:field]}:#{option[:operator]}:#{option[:value]}"}.join(',')
+
+      if query &&query.length > 0
+        filter += ',' + query
+      end
+
+      if sort.length > 0
+        filter += '&order=' + sort
+      end
+
+      filter += "limit=#{limit}?offset=#{offset}"
+
+      response = get(base_url + filter)
+      invoices = []
+      response.each do |invoice|
+        invoices << new(invoice)
+      end
+      invoices
+    end
+
+    def void
+      post(base_url + "/#{self.invoice_id}?action=void")
+    end
+
+    def send_email(options = {})
+      response = post(base_url + "/#{self.invoice_id}?action=email", options)
     end
 
 private

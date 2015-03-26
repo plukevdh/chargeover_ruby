@@ -5,6 +5,15 @@ class RecurringPackageTest < ChargoverRubyTest
     assert Chargeover::RecurringPackage
   end
 
+  def test_should_list_recurring_packages
+    VCR.use_cassette('list_packages', :match_requests_on => [:anonymized_uri]) do
+      packages = Chargeover::RecurringPackage.all
+
+      assert_equal Chargeover::RecurringPackage, packages.first.class
+      assert_equal 29, packages.length
+    end
+  end
+
   def test_should_return_a_recurring_package_by_id
     VCR.use_cassette('one_recurring_package', :match_requests_on => [:anonymized_uri]) do
       package = Chargeover::RecurringPackage.find(554)
@@ -46,8 +55,8 @@ class RecurringPackageTest < ChargoverRubyTest
     VCR.use_cassette('update_package_invoice_date', :match_requests_on => [:anonymized_uri]) do
       package = Chargeover::RecurringPackage.find(555)
       assert DateTime.parse('2015-03-24') != package.next_invoice_datetime
-      updated_package = package.update_hold_date('2015-03-24')
-      assert_equal DateTime.parse('2015-03-24'), updated_package.next_invoice_datetime
+      updated_package = package.update_hold_date('2015-03-26')
+      assert_equal DateTime.parse('2015-03-26'), updated_package.next_invoice_datetime
     end
   end
 
@@ -66,6 +75,24 @@ class RecurringPackageTest < ChargoverRubyTest
       assert_equal 'qtr', package.paycycle
       updated_package = package.update_paycycle('mon')
       assert_equal 'mon', updated_package.paycycle
+    end
+  end
+
+  def test_should_cancel_a_recurring_package
+    VCR.use_cassette('cancel_package', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(571)
+      assert package.cancel
+      canceled_package = Chargeover::RecurringPackage.find(571)
+      assert canceled_package.cancel_datetime
+    end
+  end
+
+  def test_should_return_latest_invoice
+    VCR.use_cassette('package_latest_invoice', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(571)
+      invoice = package.latest_invoice
+      assert Chargeover::Invoice, invoice.class
+      assert 571, invoice.package_id
     end
   end
 

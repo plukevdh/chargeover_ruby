@@ -17,4 +17,20 @@ class InvoiceTest < ChargoverRubyTest
     end
   end
 
+  def test_should_void_an_invoice
+    VCR.use_cassette('void_invoice', :match_requests_on => [:anonymized_uri]) do
+      invoice = Chargeover::Invoice.find(10016)
+      assert invoice.void
+      invoice = Chargeover::Invoice.find(10016)
+      assert invoice.void_datetime
+    end
+  end
+
+  def test_should_email_an_invoice
+    VCR.use_cassette('send_invoice', :match_requests_on => [:anonymized_uri]) do
+      invoice = Chargeover::Invoice.find(10016)
+      assert invoice.send_email
+    end
+  end
+
 end
