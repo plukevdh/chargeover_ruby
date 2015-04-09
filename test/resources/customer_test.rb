@@ -90,7 +90,7 @@ class CustomerTest < ChargoverRubyTest
 
   def test_should_return_the_most_recent_invoice_for_a_customer
     VCR.use_cassette('latest_invoice', :match_requests_on => [:anonymized_uri]) do
-      customer = Chargeover::Customer.find(18)
+      customer = Chargeover::Customer.find(39)
       invoice = customer.latest_invoice
       assert_equal Chargeover::Invoice, invoice.class
     end
@@ -173,5 +173,16 @@ class CustomerTest < ChargoverRubyTest
       assert_equal Chargeover::Invoice, customer.invoices.first.class
     end
   end
+
+  def test_should_return_all_contacts_for_customer
+    VCR.use_cassette('customer_with_contacts', :match_requests_on => [:anonymized_uri]) do
+      customer = Chargeover::Customer.find(44)
+
+      contacts = customer.contacts
+      assert_equal 2, contacts.length
+      assert_equal Chargeover::Contact, contacts.first.class
+    end
+  end
+
 
 end

@@ -64,4 +64,29 @@ class TransactionTest < ChargoverRubyTest
     end
   end
 
+  def test_should_create_a_check_payment_and_apply_to_invoice
+    VCR.use_cassette('create_and_apply_payment', :match_requests_on => [:anonymized_uri]) do
+      invoice = Chargeover::Invoice.find(10041)
+      assert_equal 4500.00, invoice.balance
+      transaction = Chargeover::Transaction.create(
+          customer_id: 33,
+          transaction_type: 'pay',
+          gateway_method: 'check',
+          amount: '4500.00',
+          gateway_status: 1,
+          gateway_transid: 'Manual Entry',
+          transaction_detail: 'Payment for Services',
+          applied_to: [{
+                           invoice_id: 10041
+                       }]
+      )
+      assert Chargeover::Transaction, transaction.class
+      assert 'pay', 'transaction_type'
+      assert_equal 4500.00, transaction.amount
+
+      invoice = Chargeover::Invoice.find(10041)
+      assert_equal 0, invoice.balance
+    end
+  end
+
 end

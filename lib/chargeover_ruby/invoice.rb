@@ -56,7 +56,9 @@ module Chargeover
         :package_id,
         :customer_id,
         :line_items,
-        :void_datetime
+        :void_datetime,
+        :subtotal,
+        :taxes
 
 
     def self.find_all_by_customer_id(customer_id, sort = '', options = [])

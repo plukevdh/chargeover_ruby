@@ -79,6 +79,10 @@ module Chargeover
       invoices.first
     end
 
+    def contacts
+      Contact.find_all_by_customer_id(self.customer_id)
+    end
+
 private
     attr_writer :customer_id,
                 :write_datetime,
