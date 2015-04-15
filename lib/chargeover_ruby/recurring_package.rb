@@ -101,6 +101,17 @@ module Chargeover
       end
     end
 
+    # custom update, using low level api
+    def custom_upgrade(line_item_data)
+      response = post(base_url + "/#{self.package_id}?action=upgrade", line_item_data)
+
+      if response
+        Chargeover::RecurringPackage.find(self.package_id)
+      else
+        nil
+      end
+    end
+
     # note, this is only for FLAT pricing models
     def change_line_item_price(line_item, amount, description = nil)
 
@@ -159,8 +170,41 @@ module Chargeover
       end
     end
 
-    def update_paymethod(pay_method)
-      response = post(base_url + "/#{self.package_id}?action=paymethod", { paymethod: pay_method})
+    # note this is for FLAT pricing models
+    def cancel_line_item(item)
+      data = {
+          line_items: [
+              {
+                  item_id: item.item_id,
+                  tierset: {
+                      base: amount.to_s,
+                      pricemodel: "fla",
+                      paycycle: paycycle
+                  }
+              }
+          ]
+      }
+
+      if description
+        data[:line_items].first[:descrip] = description
+      end
+
+      response = post(base_url + "/#{self.package_id}?action=upgrade", data)
+
+      if response
+        Chargeover::RecurringPackage.find(self.package_id)
+      else
+        nil
+      end
+    end
+
+
+    def update_paymethod(pay_method, options = {})
+      data = {
+          paymethod: pay_method
+      }
+      data.merge!(options)
+      response = post(base_url + "/#{self.package_id}?action=paymethod", data)
       Chargeover::RecurringPackage.find(self.package_id)
     end
 
@@ -171,6 +215,16 @@ module Chargeover
 
     def update_hold_date(hold_date)
       response = post(base_url + "/#{self.package_id}?action=hold", { holduntil_datetime: hold_date })
+      Chargeover::RecurringPackage.find(self.package_id)
+    end
+
+    def update_custom_1(new_value)
+      response = put(base_url + "/#{self.package_id}", { custom_1: new_value })
+      Chargeover::RecurringPackage.find(self.package_id)
+    end
+
+    def update_payment_terms(new_value)
+      response = put(base_url + "/#{self.package_id}", { terms_id: new_value })
       Chargeover::RecurringPackage.find(self.package_id)
     end
 
@@ -191,6 +245,11 @@ module Chargeover
         end
       end
       item
+    end
+
+    def update_attributes(attributes)
+      response = put(base_url + "/#{self.package_id}", attributes)
+      Chargeover::RecurringPackage.find(response['id'])
     end
 
 private

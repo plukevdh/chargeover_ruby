@@ -55,6 +55,7 @@ module Chargeover
                   :currency_iso4217,
                   :ship_block,
                   :bill_block,
+                  :superuser_username,
                   :tags
 
     def self.destroy(customer_id)

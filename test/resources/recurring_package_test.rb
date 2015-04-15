@@ -123,4 +123,36 @@ class RecurringPackageTest < ChargoverRubyTest
     end
   end
 
+  def test_should_update_custom_value
+    VCR.use_cassette('update_custom_1', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(640)
+      assert_equal '888888', package.custom_1
+      package = package.update_custom_1('123456')
+      assert_equal '123456', package.custom_1
+    end
+  end
+
+  def test_should_update_payment_terms
+    VCR.use_cassette('update_terms_id', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(640)
+      assert_equal 3, package.terms_id
+      package = package.update_payment_terms(2)
+      assert_equal 2, package.terms_id
+    end
+  end
+
+  def test_should_update_attributes
+    VCR.use_cassette('update_package_attributes', :match_requests_on => [:anonymized_uri]) do
+      package = Chargeover::RecurringPackage.find(640)
+      assert_equal 2, package.terms_id
+      assert_equal '123456', package.custom_1
+      package = package.update_attributes(
+                           custom_1: '777777',
+                           terms_id: 3
+      )
+      assert_equal 3, package.terms_id
+      assert_equal '777777', package.custom_1
+    end
+  end
+
 end

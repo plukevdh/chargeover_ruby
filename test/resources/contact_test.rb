@@ -52,4 +52,22 @@ class ContactTest < ChargoverRubyTest
       end
     end
   end
+
+  def test_should_return_true_if_contact_belongs_to_customer
+    VCR.use_cassette('has_contact_true', :match_requests_on => [:anonymized_uri]) do
+      contact = Chargeover::Contact.find(395)
+      assert contact.has_customer?(44)
+    end
+  end
+
+  def test_should_update_contact_for_customer
+    VCR.use_cassette('updates_contact', :match_requests_on => [:anonymized_uri]) do
+      contact = Chargeover::Contact.find(398)
+      assert_equal 'Jane Smith', contact.name
+      assert_equal 'jane@example.com', contact.email
+      contact = contact.update_attributes(name: 'Jane Doe', email: 'j@example.com')
+      assert_equal 'Jane Doe', contact.name
+      assert_equal 'j@example.com', contact.email
+    end
+  end
 end

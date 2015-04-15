@@ -38,6 +38,11 @@ module Chargeover
       contacts
     end
 
+    def update_attributes(attributes)
+      response = put(base_url + "/#{self.user_id}", attributes)
+      Chargeover::Contact.find(response['id'])
+    end
+
     def customers
       cus = []
       if @customers
@@ -46,6 +51,13 @@ module Chargeover
         end
       end
       cus
+    end
+
+    def has_customer?(customer_id)
+      self.customers.each do |customer|
+        return true if customer.customer_id.to_s == customer_id.to_s
+      end
+      return false
     end
   end
 end
