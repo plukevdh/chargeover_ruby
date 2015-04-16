@@ -16,4 +16,13 @@ class TokenizedCardTest < ChargoverRubyTest
       assert tokenized_card
     end
   end
+
+  def test_should_return_tokenized_cards_for_customer
+    VCR.use_cassette('tokenized_cards_by_customer', :match_requests_on => [:anonymized_uri]) do
+      customer = Chargeover::Customer.find(51)
+      tokenized_cards = Chargeover::TokenizedCard.find_all_by_customer_id(customer.customer_id)
+      assert_equal 1, tokenized_cards.length
+      assert Chargeover::TokenizedCard, tokenized_cards.first.class
+    end
+  end
 end
